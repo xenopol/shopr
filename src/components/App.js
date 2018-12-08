@@ -1,15 +1,34 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { toggleCheck as toggleCheckAction } from '../store/actions/listItem'
 import './App.css'
 
 import ListItem from './molecules/ListItem'
 
-const shoppingList = ['milk', 'icecream', 'bananaz', 'bread', 'oranges']
-
-const App = () => (
+const App = ({ shoppingList, toggleCheck }) => (
   <div className="App">
-    {shoppingList.map(item => <ListItem name={item} />)}
+    {shoppingList.map(({ id, name, isChecked }) => (
+      <ListItem id={id} toggleCheck={toggleCheck} key={id} name={name} isChecked={isChecked} />
+    ))}
   </div>
 )
 
+const mapStateToProps = ({ shoppingList }) => ({
+  shoppingList,
+})
 
-export default App
+const mapDispatchToProps = dispatch => ({
+  toggleCheck: id => dispatch(toggleCheckAction(id)),
+})
+
+App.propTypes = {
+  shoppingList: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    isChecked: PropTypes.bool,
+  })).isRequired,
+  toggleCheck: PropTypes.func.isRequired,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
