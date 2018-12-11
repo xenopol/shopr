@@ -1,5 +1,5 @@
 import { TOGGLE_CHECK } from '../actions/listItem'
-import { ADD_NEW_LIST_ITEM } from '../actions/addNewListItem';
+import { ADD_NEW_LIST_ITEM } from '../actions/addNewListItem'
 
 const initialState = [
   {
@@ -8,10 +8,6 @@ const initialState = [
     isChecked: false,
   },
 ]
-
-
-
-
 
 
 const shoppingList = (state = initialState, { type, payload }) => {
