@@ -6,6 +6,7 @@ import { addNewListItem as addNewListItemAction } from '../../../store/actions/a
 class Input extends Component {
   state = { inputValue: '' }
 
+
   handleNewListItem = ({ keyCode }, addNewListItem) => {
     const { inputValue } = this.state
     if (keyCode === 13 && inputValue.trim() !== '') {
