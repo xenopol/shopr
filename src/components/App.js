@@ -5,12 +5,15 @@ import { toggleCheck as toggleCheckAction } from '../store/actions/listItem'
 import './App.css'
 
 import ListItem from './molecules/ListItem'
+import Input from './atoms/Input'
 
 const App = ({ shoppingList, toggleCheck }) => (
   <div className="App">
     {shoppingList.map(({ id, name, isChecked }) => (
       <ListItem id={id} toggleCheck={toggleCheck} key={id} name={name} isChecked={isChecked} />
     ))}
+
+    <Input />
   </div>
 )
 
