@@ -11,6 +11,9 @@ const initialState = [
 
 
 
+
+
+
 const shoppingList = (state = initialState, { type, payload }) => {
   switch (type) {
     case TOGGLE_CHECK:
