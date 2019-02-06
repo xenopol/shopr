@@ -5,6 +5,7 @@ import './index.css'
 import App from './components/App'
 import configureStore from './store'
 import * as serviceWorker from './serviceWorker'
+import './styles/style.css'
 
 ReactDOM.render(
   <Provider store={configureStore()}>
