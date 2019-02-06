@@ -9,10 +9,9 @@ import Input from './atoms/Input'
 
 const App = ({ shoppingList, toggleCheck }) => (
   <div className="App">
-    {shoppingList.map(({ id, name, isChecked }) => (
-      <ListItem id={id} toggleCheck={toggleCheck} key={id} name={name} isChecked={isChecked} />
+    {shoppingList.map(({ id, name, isChecked, isEditing }) => (
+      <ListItem id={id} toggleCheck={toggleCheck} key={id} name={name} isChecked={isChecked} isEditing={isEditing} />
     ))}
-
     <Input />
   </div>
 )
@@ -30,6 +29,7 @@ App.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
     isChecked: PropTypes.bool,
+    isEditing: PropTypes.bool,
   })).isRequired,
   toggleCheck: PropTypes.func.isRequired,
 }
