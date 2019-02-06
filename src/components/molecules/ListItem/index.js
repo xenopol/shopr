@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -10,16 +10,33 @@ import {
 } from '../../../store/actions/addNewListItem'
 
 
+const listItemstyle = {
+  margin: '1rem .5rem',
+  fontSize: '1.6rem',
+  textAlign: 'left',
+  padding: '.3rem',
+}
+
+const listItemstyleHover = {
+  backgroundColor: '#f6f6f6',
+  margin: '1rem .5rem',
+  fontSize: '1.6rem',
+  textAlign: 'left',
+  padding: '.3rem',
+}
+
 const styles = {
   removeButton: {
     marginLeft: 20,
   },
 }
 
-class ListItem extends React.Component {
+class ListItem extends Component {
   constructor(props) {
     super(props)
     this.editInput = React.createRef()
+
+    this.state = { hover: false }
   }
 
   handleEditItem= ({ key }, id) => {
@@ -36,10 +53,26 @@ class ListItem extends React.Component {
     toggleEditingListItem({ id, isEditing: true })
   }
 
+  handleMouseOver = () => {
+    this.setState({ hover: true })
+  }
+
+  handleMouseOut = () => {
+    this.setState({ hover: false })
+  }
+
+
   render() {
     const { id, name, isChecked, isEditing, toggleCheck, removeItem } = this.props
+    const { hover } = this.state
+
     return (
-      <div>
+      <div // eslint-disable-line
+        className="ListItem"
+        style={hover === true ? listItemstyleHover : listItemstyle}
+        onMouseOver={this.handleMouseOver}
+        onMouseOut={this.handleMouseOut}
+      >
         <Checkbox id={id} isChecked={isChecked} toggleCheck={toggleCheck} />
         { isEditing
           ? (
