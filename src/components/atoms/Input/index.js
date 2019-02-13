@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { addNewListItem as addNewListItemAction } from '../../../store/actions/addNewListItem'
+import { addNewListItem as addNewListItemAction } from '../../../store/actions/list'
 
 class Input extends Component {
   state = { inputValue: '' }
@@ -11,12 +11,12 @@ class Input extends Component {
     const { inputValue } = this.state
     if (keyCode === 13 && inputValue.trim() !== '') {
       addNewListItem(inputValue)
-      this.setState({inputValue: ''})
+      this.setState({ inputValue: '' })
     }
   }
 
   handleChange = ({ target: { value } }) => {
-    this.setState({inputValue: value})
+    this.setState({ inputValue: value })
   }
 
   render() {

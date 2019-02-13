@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import ListItem from '../../molecules/ListItem'
-import { toggleCheck as toggleCheckAction } from '../../../store/actions/listItem'
+import Filter from '../../molecules/Filter'
+import { toggleCheck as toggleCheckAction } from '../../../store/actions/list'
 import { addNewListItem as addNewListItemAction } from '../../../store/actions/addNewListItem'
 
 
@@ -34,19 +35,22 @@ class List extends Component {
 
   render() {
     const { inputValue } = this.state
-    const { shoppingList, toggleCheck, addNewListItem } = this.props
+    const { items, id, name, toggleCheck, addNewListItem } = this.props
     return (
       <div className="List" style={style}>
-        {shoppingList.map(({ id, name, isChecked, isEditing }) => (
+        <div>{ name }</div>
+        {items.map(({ id: itemId, name: itemName, isCompleted, isEditing }) => (
           <ListItem
-            id={id}
+            listId={id}
+            id={itemId}
             toggleCheck={toggleCheck}
-            key={id}
-            name={name}
-            isChecked={isChecked}
+            key={itemId}
+            name={itemName}
+            isCompleted={isCompleted}
             isEditing={isEditing}
           />
-        ))}
+         ))}
+       <Filter />
 
         <input
           type="text"
@@ -60,23 +64,21 @@ class List extends Component {
   }
 }
 
-const mapStateToProps = ({ shoppingList }) => ({
-  shoppingList,
-})
-
 const mapDispatchToProps = dispatch => ({
-  toggleCheck: id => dispatch(toggleCheckAction(id)),
   addNewListItem: itemName => dispatch(addNewListItemAction(itemName)),
+  toggleCheck: (listId, itemId) => dispatch(toggleCheckAction(listId, itemId)),
 })
 
 List.propTypes = {
-  shoppingList: PropTypes.arrayOf(PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
-    isChecked: PropTypes.bool,
+    isCompleted: PropTypes.bool,
   })).isRequired,
   toggleCheck: PropTypes.func.isRequired,
   addNewListItem: PropTypes.func.isRequired,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(List)
+export default connect(null, mapDispatchToProps)(List)
