@@ -5,7 +5,6 @@ export const addNewListItem = itemName => ({
   payload: itemName,
 })
 
-
 export const REMOVE_LIST_ITEM = 'REMOVE_LIST_ITEM'
 
 export const removeListItem = itemId => ({
@@ -39,4 +38,11 @@ export const TOGGLE_CHECK = 'TOGGLE_CHECK'
 export const toggleCheck = (listId, itemId) => ({
   type: TOGGLE_CHECK,
   payload: { listId, itemId },
+})
+
+export const ADD_NEW_LIST = 'ADD_NEW_LIST'
+
+export const addNewList = listName => ({
+  type: ADD_NEW_LIST,
+  payload: listName,
 })
