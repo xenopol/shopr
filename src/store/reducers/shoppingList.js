@@ -5,6 +5,7 @@ import {
   EDIT_LIST_ITEM,
   TOGGLE_EDITING_LIST_ITEM,
   TOGGLE_DISPLAY_ACTIVE_ITEM,
+  ADD_NEW_LIST,
 } from '../actions/list'
 
 const initialState = {
@@ -14,7 +15,7 @@ const initialState = {
       name: '',
       items: [
         {
-          id: 3,
+          id: 1,
           name: 'milk',
           isCompleted: false,
           isEditing: false,
@@ -25,7 +26,7 @@ const initialState = {
   ],
 }
 
-const shoppingList = (state = initialState, { type, payload }) => {
+const shoppingLists = (state = initialState, { type, payload }) => {
   switch (type) {
     case TOGGLE_CHECK:
       return {
@@ -53,9 +54,11 @@ const shoppingList = (state = initialState, { type, payload }) => {
         ? { ...item, isEditing: payload.isEditing }
         : { ...item, isEditing: false }
       ))
+    case ADD_NEW_LIST:
+      return { lists: [...state.lists, { id: Date.now(), name: payload.name, showActive: true, items: [] }] }
     default:
       return state
   }
 }
 
-export default shoppingList
+export default shoppingLists

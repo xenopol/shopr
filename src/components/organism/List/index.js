@@ -4,8 +4,10 @@ import { connect } from 'react-redux'
 
 import ListItem from '../../molecules/ListItem'
 import Filter from '../../molecules/Filter'
-import { toggleCheck as toggleCheckAction } from '../../../store/actions/list'
-import { addNewListItem as addNewListItemAction } from '../../../store/actions/addNewListItem'
+import {
+  toggleCheck as toggleCheckAction,
+  addNewListItem as addNewListItemAction,
+} from '../../../store/actions/list'
 
 
 const style = {
@@ -36,6 +38,7 @@ class List extends Component {
   render() {
     const { inputValue } = this.state
     const { items, id, name, toggleCheck, addNewListItem } = this.props
+
     return (
       <div className="List" style={style}>
         <div>{ name }</div>
@@ -49,8 +52,8 @@ class List extends Component {
             isCompleted={isCompleted}
             isEditing={isEditing}
           />
-         ))}
-       <Filter />
+        ))}
+        <Filter />
 
         <input
           type="text"

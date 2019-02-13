@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { addNewListItem as addNewListItemAction } from '../../../store/actions/list'
+import { addNewList as addNewListAction } from '../../../store/actions/list'
 
 class Input extends Component {
   state = { inputValue: '' }
 
 
-  handleNewListItem = ({ keyCode }, addNewListItem) => {
+  handleNewList = ({ keyCode }, addNewList) => {
     const { inputValue } = this.state
     if (keyCode === 13 && inputValue.trim() !== '') {
-      addNewListItem(inputValue)
+      addNewList(inputValue)
       this.setState({ inputValue: '' })
     }
   }
@@ -21,24 +21,24 @@ class Input extends Component {
 
   render() {
     const { inputValue } = this.state
-    const { addNewListItem } = this.props
+    const { addNewList } = this.props
     return (
       <input
         type="text"
         value={inputValue}
         placeholder="Add new item"
-        onKeyDown={e => this.handleNewListItem(e, addNewListItem)}
+        onKeyDown={e => this.handleNewList(e, addNewList)}
         onChange={this.handleChange}
       />
     )
   }
 }
 const mapDispatchToProps = dispatch => ({
-  addNewListItem: itemName => dispatch(addNewListItemAction(itemName)),
+  addNewList: itemName => dispatch(addNewListAction(itemName)),
 })
 
 Input.propTypes = {
-  addNewListItem: PropTypes.func.isRequired,
+  addNewList: PropTypes.func.isRequired,
 }
 
 export default connect(null, mapDispatchToProps)(Input)
