@@ -7,14 +7,18 @@ import {
   removeListItem as removeListItemAction,
   editListItem as editListItemAction,
   toggleEditingListItem as toggleEditingListItemAction,
-} from '../../../store/actions/addNewListItem'
+} from '../../../store/actions/list'
 
 
 const listItemstyle = {
+  backgroundColor: '#ededed',
   margin: '1rem .5rem',
   fontSize: '1.6rem',
   textAlign: 'left',
   padding: '.3rem',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
 }
 
 const listItemstyleHover = {
@@ -23,6 +27,9 @@ const listItemstyleHover = {
   fontSize: '1.6rem',
   textAlign: 'left',
   padding: '.3rem',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
 }
 
 const styles = {
@@ -63,7 +70,7 @@ class ListItem extends Component {
 
 
   render() {
-    const { id, name, isChecked, isEditing, toggleCheck, removeItem } = this.props
+    const { listId, id, name, isCompleted, isEditing, toggleCheck, removeItem } = this.props
     const { hover } = this.state
 
     return (
@@ -73,18 +80,19 @@ class ListItem extends Component {
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
       >
-        <Checkbox id={id} isChecked={isChecked} toggleCheck={toggleCheck} />
-        { isEditing
-          ? (
-            <input
-              ref={this.editInput}
-              type="text"
-              defaultValue={name}
-              autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-              onKeyPress={(event) => { this.handleEditItem(event, id) }}
-            />
-          )
-          : <p onDoubleClick={() => { this.handleDoubleClick(id) }}>{name}</p>
+        <div>
+          <Checkbox listId={listId} id={id} isCompleted={isCompleted} toggleCheck={toggleCheck} />
+          { isEditing
+            ? (
+              <input
+                ref={this.editInput}
+                type="text"
+                defaultValue={name}
+                autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+                onKeyPress={(event) => { this.handleEditItem(event, id) }}
+              />
+            )
+            : <p onDoubleClick={() => { this.handleDoubleClick(id) }}>{name}</p>
         }
         <div // eslint-disable-line
           style={styles.removeButton}
@@ -92,6 +100,8 @@ class ListItem extends Component {
         >
           X
         </div>
+        </div>
+        <div />
       </div>
     )
   }
@@ -104,9 +114,10 @@ const mapDispatchToProps = dispatch => ({
 })
 
 ListItem.propTypes = {
+  listId: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  isChecked: PropTypes.bool,
+  isCompleted: PropTypes.bool,
   isEditing: PropTypes.bool,
   toggleCheck: PropTypes.func.isRequired,
   editListItem: PropTypes.func.isRequired,
@@ -115,7 +126,7 @@ ListItem.propTypes = {
 }
 
 ListItem.defaultProps = {
-  isChecked: false,
+  isCompleted: false,
   isEditing: false,
 }
 

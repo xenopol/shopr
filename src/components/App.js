@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import './App.css'
 
 import Input from './atoms/Input'
@@ -12,13 +14,27 @@ const listContainerStyle = {
   flexWrap: 'wrap',
 }
 
-const App = () => (
+const App = ({ lists }) => (
   <div className="App">
     <Input />
     <div className="List-container" style={listContainerStyle}>
-      <List />
+      {lists.map(({ id, name, items }) => (
+        <List key={id} id={id} name={name} items={items} />
+      ))}
     </div>
   </div>
 )
 
-export default App
+const mapStateToProps = ({ shoppingList: { lists } }) => ({
+  lists,
+})
+
+App.propTypes = {
+  lists: PropTypes.arrayOf(PropTypes.object),
+}
+
+App.defaultProps = {
+  lists: [],
+}
+
+export default connect(mapStateToProps)(App)
