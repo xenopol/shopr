@@ -47,17 +47,17 @@ class ListItem extends Component {
   }
 
   handleEditItem= ({ key }, id) => {
-    const { editListItem, toggleEditingListItem } = this.props
+    const { listId, editListItem, toggleEditingListItem } = this.props
 
     if (key === 'Enter') {
-      editListItem({ id, name: this.editInput.current.value })
-      toggleEditingListItem({ id, isEditing: false })
+      editListItem(listId, { id, name: this.editInput.current.value })
+      toggleEditingListItem(listId, { id, isEditing: false })
     }
   }
 
   handleDoubleClick= (id) => {
-    const { toggleEditingListItem } = this.props
-    toggleEditingListItem({ id, isEditing: true })
+    const { listId, toggleEditingListItem } = this.props
+    toggleEditingListItem(listId, { id, isEditing: true })
   }
 
   handleMouseOver = () => {
@@ -96,7 +96,7 @@ class ListItem extends Component {
         }
         <div // eslint-disable-line
           style={styles.removeButton}
-          onClick={() => { removeItem(id) }}
+          onClick={() => { removeItem(listId, id) }}
         >
           X
         </div>
@@ -108,9 +108,9 @@ class ListItem extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  removeItem: id => dispatch(removeListItemAction(id)),
-  editListItem: itemData => dispatch(editListItemAction(itemData)),
-  toggleEditingListItem: itemData => dispatch(toggleEditingListItemAction(itemData)),
+  removeItem: (listId, id) => dispatch(removeListItemAction(listId, id)),
+  editListItem: (listId, itemData) => dispatch(editListItemAction(listId, itemData)),
+  toggleEditingListItem: (listId, itemData) => dispatch(toggleEditingListItemAction(listId, itemData)),
 })
 
 ListItem.propTypes = {
