@@ -1,0 +1,28 @@
+.ListItem {
+  margin: 1rem 0.5rem;
+  font-size: 1.6rem;
+  text-align: left;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.ListItem:hover {
+  background-color: #ededed;
+}
+
+.add-item {
+  margin-right: 0.5rem;
+}
+
+.delete-button {
+  opacity: 0;
+  position: absolute;
+  right: 0.5rem;
+  font-size: 70%;
+}
+
+.ListItem:hover .delete-button {
+  opacity: 1;
+}

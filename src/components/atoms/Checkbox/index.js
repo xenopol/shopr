@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 
 const Checkbox = ({ listId, id, isCompleted, toggleCheck }) => (
-  <input type="checkbox" checked={isCompleted} onChange={() => toggleCheck(listId, id)} />
+  <input className="add-item" type="checkbox" checked={isCompleted} onChange={() => toggleCheck(listId, id)} />
 )
 
 Checkbox.propTypes = {

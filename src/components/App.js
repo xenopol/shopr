@@ -6,18 +6,10 @@ import './App.css'
 import Input from './atoms/Input'
 import List from './organism/List'
 
-const listContainerStyle = {
-  width: '100vw',
-  padding: '5rem',
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-}
-
 const App = ({ lists }) => (
   <div className="App">
-    <Input />
-    <div className="List-container" style={listContainerStyle}>
+    <Input className="create-list-input" />
+    <div className="List-container">
       {lists.map(({ id, name, items, showActive }) => (
         <List key={id} id={id} name={name} items={items} showActive={showActive} />
       ))}
