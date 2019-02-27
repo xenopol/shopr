@@ -21,12 +21,13 @@ class Input extends Component {
 
   render() {
     const { inputValue } = this.state
-    const { addNewList } = this.props
+    const { addNewList, className } = this.props
     return (
       <input
+        className={className}
         type="text"
         value={inputValue}
-        placeholder="Add new item"
+        placeholder="Add new list"
         onKeyDown={e => this.handleNewList(e, addNewList)}
         onChange={this.handleChange}
       />
@@ -39,6 +40,11 @@ const mapDispatchToProps = dispatch => ({
 
 Input.propTypes = {
   addNewList: PropTypes.func.isRequired,
+  className: PropTypes.string,
+}
+
+Input.defaultProps = {
+  className: null,
 }
 
 export default connect(null, mapDispatchToProps)(Input)
