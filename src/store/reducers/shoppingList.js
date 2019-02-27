@@ -92,7 +92,7 @@ const shoppingLists = (state = initialState, { type, payload }) => {
         return list
       }) }
     case ADD_NEW_LIST:
-      return { lists: [...state.lists, { id: Date.now(), name: payload, showActive: true, items: [] }] }
+      return { lists: [...state.lists, { id: Date.now(), name: payload, showActive: false, items: [] }] }
     default:
       return state
   }
