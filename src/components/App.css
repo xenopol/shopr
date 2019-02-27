@@ -5,3 +5,16 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+.create-list-input {
+  position: absolute;
+  top: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 3.5rem;
+  width: 40rem;
+  padding: 2.2rem;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0.5rem 0.5rem 0.4rem -0.3rem #0000004d;
+}

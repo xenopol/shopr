@@ -28,23 +28,26 @@ class List extends Component {
 
   render() {
     const { inputValue } = this.state
-    const { items, id, name, toggleCheck, addNewListItem } = this.props
+    const { items, id, name, toggleCheck, addNewListItem, showActive } = this.props
 
     return (
       <div className="List">
-        <div>{ name }</div>
-        {items.map(({ id: itemId, name: itemName, isCompleted, isEditing }) => (
-          <ListItem
-            listId={id}
-            id={itemId}
-            toggleCheck={toggleCheck}
-            key={itemId}
-            name={itemName}
-            isCompleted={isCompleted}
-            isEditing={isEditing}
-          />
-        ))}
-        <Filter />
+        <div className="List-name">{name}</div>
+        <Filter listId={id} showActive={showActive} />
+
+        {items
+          .filter(item => (showActive ? item.isCompleted === showActive : true))
+          .map(({ id: itemId, name: itemName, isCompleted, isEditing }) => (
+            <ListItem
+              listId={id}
+              id={itemId}
+              toggleCheck={toggleCheck}
+              key={itemId}
+              name={itemName}
+              isCompleted={isCompleted}
+              isEditing={isEditing}
+            />
+          ))}
 
         <input
           type="text"
@@ -71,6 +74,7 @@ List.propTypes = {
     name: PropTypes.string,
     isCompleted: PropTypes.bool,
   })).isRequired,
+  showActive: PropTypes.bool.isRequired,
   toggleCheck: PropTypes.func.isRequired,
   addNewListItem: PropTypes.func.isRequired,
 }

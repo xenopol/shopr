@@ -10,8 +10,8 @@ const App = ({ lists }) => (
   <div className="App">
     <Input className="create-list-input" />
     <div className="List-container">
-      {lists.map(({ id, name, items }) => (
-        <List key={id} id={id} name={name} items={items} />
+      {lists.map(({ id, name, items, showActive }) => (
+        <List key={id} id={id} name={name} items={items} showActive={showActive} />
       ))}
     </div>
   </div>

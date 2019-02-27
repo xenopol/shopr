@@ -26,10 +26,10 @@ export const toggleEditingListItem = (listId, itemData) => ({
   payload: { listId, itemData },
 })
 
-export const TOGGLE_DISPLAY_ACTIVE_ITEM = 'TOGGLE_DISPLAY_ACTIVE_ITEM'
+export const TOGGLE_DISPLAY_ACTIVE_ITEMS = 'TOGGLE_DISPLAY_ACTIVE_ITEMS'
 
-export const toggleDisplayActiveItem = listId => ({
-  type: TOGGLE_DISPLAY_ACTIVE_ITEM,
+export const toggleDisplayActiveItems = listId => ({
+  type: TOGGLE_DISPLAY_ACTIVE_ITEMS,
   payload: listId,
 })
 
