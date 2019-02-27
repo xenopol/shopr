@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-
+import './style.css'
 import Checkbox from '../../atoms/Checkbox'
 import {
   removeListItem as removeListItemAction,
@@ -10,40 +10,10 @@ import {
 } from '../../../store/actions/list'
 
 
-const listItemstyle = {
-  backgroundColor: '#ededed',
-  margin: '1rem .5rem',
-  fontSize: '1.6rem',
-  textAlign: 'left',
-  padding: '.3rem',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-}
-
-const listItemstyleHover = {
-  backgroundColor: '#f6f6f6',
-  margin: '1rem .5rem',
-  fontSize: '1.6rem',
-  textAlign: 'left',
-  padding: '.3rem',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-}
-
-const styles = {
-  removeButton: {
-    marginLeft: 20,
-  },
-}
-
 class ListItem extends Component {
   constructor(props) {
     super(props)
     this.editInput = React.createRef()
-
-    this.state = { hover: false }
   }
 
   handleEditItem= ({ key }, id) => {
@@ -60,48 +30,31 @@ class ListItem extends Component {
     toggleEditingListItem(listId, { id, isEditing: true })
   }
 
-  handleMouseOver = () => {
-    this.setState({ hover: true })
-  }
-
-  handleMouseOut = () => {
-    this.setState({ hover: false })
-  }
-
-
   render() {
     const { listId, id, name, isCompleted, isEditing, toggleCheck, removeItem } = this.props
-    const { hover } = this.state
 
     return (
-      <div // eslint-disable-line
-        className="ListItem"
-        style={hover === true ? listItemstyleHover : listItemstyle}
-        onMouseOver={this.handleMouseOver}
-        onMouseOut={this.handleMouseOut}
-      >
-        <div>
-          <Checkbox listId={listId} id={id} isCompleted={isCompleted} toggleCheck={toggleCheck} />
-          { isEditing
-            ? (
-              <input
-                ref={this.editInput}
-                type="text"
-                defaultValue={name}
-                autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-                onKeyPress={(event) => { this.handleEditItem(event, id) }}
-              />
-            )
-            : <p onDoubleClick={() => { this.handleDoubleClick(id) }}>{name}</p>
-        }
-        <div // eslint-disable-line
-          style={styles.removeButton}
-          onClick={() => { removeItem(listId, id) }}
+
+      <div className="ListItem">
+        <Checkbox listId={listId} id={id} isCompleted={isCompleted} toggleCheck={toggleCheck} />
+        { isEditing
+          ? (
+            <input
+              className="add-item"
+              ref={this.editInput}
+              type="text"
+              defaultValue={name}
+              autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+              onKeyPress={(event) => { this.handleEditItem(event, id) }}
+            />
+          )
+          : <p onDoubleClick={() => { this.handleDoubleClick(id) }}>{name}</p>
+          }
+        <div className='delete-button' // eslint-disable-line
+          oonClick={() => { removeItem(listId, id) }}
         >
           X
         </div>
-        </div>
-        <div />
       </div>
     )
   }

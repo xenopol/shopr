@@ -2,23 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import './style.css'
 import ListItem from '../../molecules/ListItem'
 import Filter from '../../molecules/Filter'
 import {
   toggleCheck as toggleCheckAction,
   addNewListItem as addNewListItemAction,
 } from '../../../store/actions/list'
-
-
-const style = {
-  backgroundColor: 'white',
-  padding: '2rem',
-  margin: '2rem',
-  width: '20rem',
-  minHeight: '8rem',
-  borderRadius: '1.5rem',
-  boxShadow: '.5rem .5rem .4rem -.3rem #0000004D',
-}
 
 class List extends Component {
   state = { inputValue: '' }
@@ -41,7 +31,7 @@ class List extends Component {
     const { items, id, name, toggleCheck, addNewListItem } = this.props
 
     return (
-      <div className="List" style={style}>
+      <div className="List">
         <div>{ name }</div>
         {items.map(({ id: itemId, name: itemName, isCompleted, isEditing }) => (
           <ListItem
