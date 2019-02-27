@@ -1,29 +1,29 @@
 export const ADD_NEW_LIST_ITEM = 'ADD_NEW_LIST_ITEM'
 
-export const addNewListItem = itemName => ({
+export const addNewListItem = (listId, itemName) => ({
   type: ADD_NEW_LIST_ITEM,
-  payload: itemName,
+  payload: { listId, itemName },
 })
 
 export const REMOVE_LIST_ITEM = 'REMOVE_LIST_ITEM'
 
-export const removeListItem = itemId => ({
+export const removeListItem = (listId, itemId) => ({
   type: REMOVE_LIST_ITEM,
-  payload: itemId,
+  payload: { listId, itemId },
 })
 
 export const EDIT_LIST_ITEM = 'EDIT_LIST_ITEM'
 
-export const editListItem = itemData => ({
+export const editListItem = (listId, itemData) => ({
   type: EDIT_LIST_ITEM,
-  payload: itemData,
+  payload: { listId, itemData },
 })
 
 export const TOGGLE_EDITING_LIST_ITEM = 'TOGGLE_EDITING_LIST_ITEM'
 
-export const toggleEditingListItem = itemData => ({
+export const toggleEditingListItem = (listId, itemData) => ({
   type: TOGGLE_EDITING_LIST_ITEM,
-  payload: itemData,
+  payload: { listId, itemData },
 })
 
 export const TOGGLE_DISPLAY_ACTIVE_ITEM = 'TOGGLE_DISPLAY_ACTIVE_ITEM'

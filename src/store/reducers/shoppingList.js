@@ -15,7 +15,7 @@ const initialState = {
       name: '',
       items: [
         {
-          id: 1,
+          id: Date.now(),
           name: 'milk',
           isCompleted: false,
           isEditing: false,
@@ -42,18 +42,53 @@ const shoppingLists = (state = initialState, { type, payload }) => {
         }),
       }
     case ADD_NEW_LIST_ITEM:
-      return [...state, { id: state.length + 1, name: payload, isCompleted: false }]
+      return { lists: state.lists.map((list) => {
+        if (list.id === payload.listId) {
+          return {
+            ...list,
+            items: [...list.items, { id: Date.now(), name: payload.itemName, isCompleted: false, isEditing: false }],
+          }
+        }
+        return list
+      }) }
     case REMOVE_LIST_ITEM:
-      return state.filter(({ id }) => id !== payload)
+      return { lists: state.lists.map((list) => {
+        if (list.id === payload.listId) {
+          return {
+            ...list,
+            items: list.items.filter(item => item.id !== payload.itemId),
+          }
+        }
+        return list
+      }) }
     case EDIT_LIST_ITEM:
-      return state.map(item => (item.id === payload.id ? { ...item, name: payload.name } : item))
+      return { lists: state.lists.map((list) => {
+        if (list.id === payload.listId) {
+          return { ...list,
+            items: list.items.map((item) => {
+              if (item.id === payload.itemData.id) {
+                return { ...item, name: payload.itemData.name }
+              }
+              return item
+            }) }
+        }
+        return list
+      }) }
     case TOGGLE_DISPLAY_ACTIVE_ITEM:
       return state.map(item => (item.id === payload.id ? { ...item, name: payload.name } : item))
     case TOGGLE_EDITING_LIST_ITEM:
-      return state.map(item => (item.id === payload.id
-        ? { ...item, isEditing: payload.isEditing }
-        : { ...item, isEditing: false }
-      ))
+      return { lists: state.lists.map((list) => {
+        if (list.id === payload.listId) {
+          return { ...list,
+            items: list.items.map((item) => {
+              if (item.id === payload.itemData.id) {
+                return { ...item, isEditing: !item.isEditing }
+              }
+              return item
+            }) }
+        }
+        return list
+      }) }
     case ADD_NEW_LIST:
       return { lists: [...state.lists, { id: Date.now(), name: payload.name, showActive: true, items: [] }] }
     default:

@@ -14,9 +14,10 @@ class List extends Component {
   state = { inputValue: '' }
 
   handleNewListItem = ({ keyCode }, addNewListItem) => {
+    const { id } = this.props
     const { inputValue } = this.state
     if (keyCode === 13 && inputValue.trim() !== '') {
-      addNewListItem(inputValue)
+      addNewListItem(id, inputValue)
       this.setState({ inputValue: '' })
     }
   }
@@ -58,7 +59,7 @@ class List extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addNewListItem: itemName => dispatch(addNewListItemAction(itemName)),
+  addNewListItem: (listId, itemName) => dispatch(addNewListItemAction(listId, itemName)),
   toggleCheck: (listId, itemId) => dispatch(toggleCheckAction(listId, itemId)),
 })
 
