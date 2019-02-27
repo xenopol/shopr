@@ -4,15 +4,15 @@ import {
   REMOVE_LIST_ITEM,
   EDIT_LIST_ITEM,
   TOGGLE_EDITING_LIST_ITEM,
-  TOGGLE_DISPLAY_ACTIVE_ITEM,
+  TOGGLE_DISPLAY_ACTIVE_ITEMS,
   ADD_NEW_LIST,
 } from '../actions/list'
 
 const initialState = {
   lists: [
     {
-      id: 1,
-      name: '',
+      id: Date.now(),
+      name: 'My list',
       items: [
         {
           id: Date.now(),
@@ -21,7 +21,7 @@ const initialState = {
           isEditing: false,
         },
       ],
-      showActive: true,
+      showActive: false,
     },
   ],
 }
@@ -74,8 +74,10 @@ const shoppingLists = (state = initialState, { type, payload }) => {
         }
         return list
       }) }
-    case TOGGLE_DISPLAY_ACTIVE_ITEM:
-      return state.map(item => (item.id === payload.id ? { ...item, name: payload.name } : item))
+    case TOGGLE_DISPLAY_ACTIVE_ITEMS:
+      return {
+        lists: state.lists.map(list => (list.id === payload ? { ...list, showActive: !list.showActive } : list)),
+      }
     case TOGGLE_EDITING_LIST_ITEM:
       return { lists: state.lists.map((list) => {
         if (list.id === payload.listId) {
@@ -90,7 +92,7 @@ const shoppingLists = (state = initialState, { type, payload }) => {
         return list
       }) }
     case ADD_NEW_LIST:
-      return { lists: [...state.lists, { id: Date.now(), name: payload.name, showActive: true, items: [] }] }
+      return { lists: [...state.lists, { id: Date.now(), name: payload, showActive: true, items: [] }] }
     default:
       return state
   }

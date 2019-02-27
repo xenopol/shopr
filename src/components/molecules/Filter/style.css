@@ -1,0 +1,16 @@
+.Filter {
+  margin: 1rem;
+  padding: .5rem 1rem;
+  font-size: 14px;
+  border-radius: .5rem;
+}
+
+.Filter:focus {
+  outline: none;
+}
+
+.Filter-active {
+  background: green;
+  color: white;
+  border: 1px solid green;
+}

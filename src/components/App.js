@@ -18,8 +18,8 @@ const App = ({ lists }) => (
   <div className="App">
     <Input />
     <div className="List-container" style={listContainerStyle}>
-      {lists.map(({ id, name, items }) => (
-        <List key={id} id={id} name={name} items={items} />
+      {lists.map(({ id, name, items, showActive }) => (
+        <List key={id} id={id} name={name} items={items} showActive={showActive} />
       ))}
     </div>
   </div>
